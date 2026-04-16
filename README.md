@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cipher
+
+A sleek AI chat client powered by open-source models. Built with Next.js, streaming responses, and thinking visualization.
+
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+## Features
+
+- **Real-time Streaming** — Responses stream token-by-token as the model generates them
+- **Thinking Visualization** — Collapsible thinking blocks for reasoning models (Qwen Thinking)
+- **Markdown Rendering** — Full markdown support with syntax-highlighted code blocks, tables, and more
+- **Copy Code** — One-click copy button on all code blocks
+- **Chat Management** — Create, switch, and delete multiple conversations
+- **System Prompt** — Customize the AI's behavior with custom system prompts
+- **Local Storage** — All chats and settings persist in your browser
+- **Responsive Design** — Works on desktop and mobile with collapsible sidebar
+- **Dark Theme** — Clean, modern dark UI
+
+## Supported Models
+
+| Model | Type | Description |
+|-------|------|-------------|
+| Qwen 3.6 Plus Thinking | Reasoning | Latest, most capable with step-by-step thinking |
+| Qwen 3.6 Plus | Fast | Latest model, fast responses |
+| Qwen 3.5 Plus Thinking | Reasoning | Stable reasoning model |
+| Qwen 3.5 Plus | Fast | Stable, fast responses |
+
+Models are accessed via [Dialagram Nexum Router](https://www.dialagram.me/router) (OpenAI-compatible API).
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS 4
+- **Markdown**: react-markdown + remark-gfm + rehype-highlight
+- **Icons**: Lucide React
+- **Code Highlighting**: highlight.js
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- An API key from [Dialagram Nexum Router](https://www.dialagram.me/router)
+
+### Installation
+
+```bash
+git clone https://github.com/phamdung2209/ai-chat.git
+cd ai-chat
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+1. Open the app in your browser
+2. Click **Settings** in the sidebar
+3. Enter your API key
+4. Select a model
+5. Start chatting
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+  api/chat/route.ts        # API proxy to avoid CORS
+  components/
+    ChatApp.tsx             # Main orchestrator component
+    Sidebar.tsx             # Chat list + settings panel
+    ChatMessages.tsx        # Message list display
+    ChatInput.tsx           # Text input + send/stop
+    MarkdownRenderer.tsx    # Markdown + code highlight
+    ThinkingBlock.tsx       # Collapsible thinking block
+  hooks/
+    useLocalStorage.ts      # Generic localStorage hook
+  lib/
+    types.ts                # TypeScript interfaces
+    constants.ts            # API URL, models config
+    chat-service.ts         # Streaming logic
+  globals.css               # Tailwind + custom styles
+  layout.tsx                # Root layout
+  page.tsx                  # Entry page
+```
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
